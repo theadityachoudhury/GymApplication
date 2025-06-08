@@ -1,0 +1,30 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`InputField Component > matches snapshot 1`] = `
+<div>
+  <div
+    class="w-full undefined"
+  >
+    <fieldset
+      class="relative mt-1 w-full border rounded-md px-3 pt-4 pb-2 text-primary-black focus-within:border-1 focus-within:border-primary-black border-neutral-200"
+    >
+      <legend
+        class="absolute left-2 transition-all px-1 text-sm -top-3 text-primary-black bg-white"
+      >
+        Username
+      </legend>
+      <input
+        class="w-full pb-1 outline-none bg-transparent border-none text-base pt-1"
+        name="username"
+        placeholder="Enter username"
+        type="text"
+      />
+    </fieldset>
+    <p
+      class="mt-1 text-xs text-neutral-600"
+    >
+      Must be at least 3 characters
+    </p>
+  </div>
+</div>
+`;

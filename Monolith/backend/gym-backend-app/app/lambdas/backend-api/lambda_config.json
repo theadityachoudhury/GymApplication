@@ -1,0 +1,43 @@
+{
+  "version": "1.0",
+  "name": "backend-api",
+  "func_name": "lambdas/backend-api/dist/index.handler",
+  "resource_type": "lambda",
+  "iam_role_name": "backend-api-role",
+  "runtime": "nodejs20.x",
+  "memory": 128,
+  "timeout": 100,
+  "lambda_path": "lambdas\\backend-api",
+  "dependencies": [
+    {
+      "resource_name": "user_auth_pool",
+      "resource_type": "cognito_idp"
+    }
+  ],
+  "event_sources": [],
+  "env_variables": {
+    "CLIENT_ID": {
+      "resource_name": "user_auth_pool",
+      "resource_type": "cognito_idp",
+      "parameter": "client_id"
+    },
+    "USER_POOL_ID": {
+      "resource_name": "user_auth_pool",
+      "resource_type": "cognito_idp",
+      "parameter": "id"
+    },
+    "MONGO_URI": "${MONGO_URI}",
+    "ALLOWED_ORIGIN": "${ALLOWED_ORIGIN}"
+  },
+  "subnet_ids": [
+    "subnet-0682545f75bd181f0"
+  ],
+  "security_group_ids": [
+    "sg-091ee076837339ceb"
+  ],
+  "publish_version": true,
+  "alias": "${lambdas_alias_name}",
+  "url_config": {},
+  "ephemeral_storage": 512,
+  "tags": {}
+}

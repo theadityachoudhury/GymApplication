@@ -1,0 +1,76 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CoachCard Component > matches snapshot 1`] = `
+<div>
+  <div
+    class="flex flex-col rounded-2xl h-full bg-white shadow-lg overflow-hidden flex-1 min-w-[250px] max-w-[300px]"
+  >
+    <div
+      class="w-full aspect-[4/3]"
+    >
+      <img
+        alt="John Doe"
+        class="w-full h-full object-cover object-center"
+        src="https://example.com/coach-image.jpg"
+      />
+    </div>
+    <div
+      class="p-5 flex flex-col flex-1 justify-between"
+    >
+      <div
+        class="flex justify-between items-start mb-1"
+      >
+        <h2
+          class="text-lg font-semibold text-gray-800"
+        >
+          John Doe
+        </h2>
+        <div
+          class="flex items-center gap-1"
+        >
+          <span
+            class="text-sm font-semibold text-gray-700"
+          >
+            4.85
+          </span>
+          <svg
+            class="text-yellow-400"
+            fill="currentColor"
+            height="16"
+            viewBox="0 0 24 24"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
+            />
+          </svg>
+        </div>
+      </div>
+      <h3
+        class="text-sm text-gray-500 mb-3"
+      >
+        Fitness Expert
+      </h3>
+      <p
+        class="text-sm text-gray-600 mb-5 leading-relaxed line-clamp-3"
+      >
+        I will help you achieve your fitness goals with personalized training programs.
+      </p>
+      <button
+        class="
+        rounded-md font-medium transition-all flex items-center justify-center disabled:cursor-not-allowed
+        bg-primary-green text-black hover:bg-primary-white border border-primary-green hover:border-black cursor-pointer
+        text-base py-3 px-4
+        
+        
+        
+      "
+        type="button"
+      >
+        Book Workout
+      </button>
+    </div>
+  </div>
+</div>
+`;
