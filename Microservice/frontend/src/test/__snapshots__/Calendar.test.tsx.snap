@@ -1,0 +1,248 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CalendarContainer Component > matches snapshot 1`] = `
+<div>
+  <div
+    class="w-full font-lexend"
+  >
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <div
+      data-testid="datepicker-mock"
+    >
+      <div>
+        <div
+          class="flex justify-between items-center p-4 font-lexend w-full"
+        >
+          <button
+            class="p-1 rounded-full hover:bg-gray-100 text-gray-500"
+          >
+            <div
+              data-testid="chevron-left-icon"
+            >
+              ←
+            </div>
+          </button>
+          <div
+            class="text-xl font-lexend"
+          >
+            June 2023
+          </div>
+          <button
+            class="p-1 rounded-full hover:bg-gray-100 text-gray-400"
+          >
+            <div
+              data-testid="chevron-right-icon"
+            >
+              →
+            </div>
+          </button>
+        </div>
+        <hr
+          class="border-t border-gray-200 mx-4"
+        />
+      </div>
+      <div
+        class="react-datepicker__day-names"
+      >
+        <div>
+          SUN
+        </div>
+        <div>
+          MON
+        </div>
+        <div>
+          TUE
+        </div>
+        <div>
+          WED
+        </div>
+        <div>
+          THU
+        </div>
+        <div>
+          FRI
+        </div>
+        <div>
+          SAT
+        </div>
+      </div>
+      <div
+        class="react-datepicker__month"
+      >
+        <div
+          data-testid="day-10"
+        >
+          <div
+            class="flex flex-col items-center"
+          >
+            <div
+              class="
+          flex flex-col items-center justify-center h-10 w-10 rounded-full mx-auto font-lexend
+          text-gray-300
+          
+          
+          
+        "
+            >
+              10
+            </div>
+          </div>
+        </div>
+        <div
+          data-testid="day-15"
+        >
+          <div
+            class="flex flex-col items-center"
+          >
+            <div
+              class="
+          flex flex-col items-center justify-center h-10 w-10 rounded-full mx-auto font-lexend
+          text-gray-700
+          
+          hover:bg-gray-100 hover:rounded-full
+          
+        "
+            >
+              15
+            </div>
+          </div>
+        </div>
+        <div
+          data-testid="day-20"
+        >
+          <div
+            class="flex flex-col items-center"
+          >
+            <div
+              class="
+          flex flex-col items-center justify-center h-10 w-10 rounded-full mx-auto font-lexend
+          text-gray-700
+          bg-green-100 border-2 border-green-300
+          
+          
+        "
+            >
+              20
+            </div>
+          </div>
+        </div>
+        <div
+          data-testid="day-25"
+        >
+          <div
+            class="flex flex-col items-center"
+          >
+            <div
+              class="
+          flex flex-col items-center justify-center h-10 w-10 rounded-full mx-auto font-lexend
+          text-gray-700
+          
+          hover:bg-gray-100 hover:rounded-full
+          
+        "
+            >
+              25
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <style>
+      
+        @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap');
+
+        .font-lexend {
+          font-family: 'Lexend', sans-serif;
+        }
+
+        .react-datepicker {
+          border: none;
+          width: 100%;
+          font-family: 'Lexend', sans-serif;
+        }
+
+        .react-datepicker * {
+          font-family: 'Lexend', sans-serif;
+        }
+
+        .react-datepicker__month-container {
+          width: 100%;
+        }
+
+        .react-datepicker__month {
+          margin: 0;
+          padding: 0 1rem 1rem;
+        }
+
+        .react-datepicker__week {
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .react-datepicker__day {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0;
+          padding: 0;
+          width: 40px;
+          height: 40px;
+        }
+
+        .react-datepicker__header {
+          background-color: white;
+          border-bottom: none;
+        }
+
+        .react-datepicker__day-names {
+          display: flex;
+          justify-content: space-between;
+          padding: 0 1rem;
+          margin-bottom: 0.5rem;
+        }
+
+        .react-datepicker__day-name {
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0;
+          color: #666;
+          font-weight: 600;
+          font-size: 0.75rem;
+        }
+
+        .react-datepicker__day--selected,
+        .react-datepicker__day--keyboard-selected,
+        .react-datepicker__day--in-selecting-range,
+        .react-datepicker__day--in-range {
+          background-color: transparent !important;
+          color: black !important;
+        }
+
+        .react-datepicker__day:focus,
+        .react-datepicker__day--selected:focus,
+        .react-datepicker__day--keyboard-selected:focus {
+          outline: none !important;
+        }
+
+        .react-datepicker__day:hover,
+        .react-datepicker__day--selected:hover,
+        .react-datepicker__day--keyboard-selected:hover {
+          border-radius: 50% !important;
+          background-color: #f3f4f6 !important;
+        }
+        
+        .react-datepicker__day--excluded {
+          cursor: not-allowed;
+          color: #ccc !important;
+        }
+      
+    </style>
+  </div>
+</div>
+`;

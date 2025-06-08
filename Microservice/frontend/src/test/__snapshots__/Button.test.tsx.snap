@@ -1,0 +1,19 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Button Component > matches snapshot for primary button 1`] = `
+<div>
+  <button
+    class="
+        rounded-md font-medium transition-all flex items-center justify-center disabled:cursor-not-allowed
+        bg-primary-green text-black hover:bg-primary-white border border-primary-green hover:border-black cursor-pointer
+        text-base py-3 px-4
+        
+        
+        
+      "
+    type="button"
+  >
+    Snapshot Test
+  </button>
+</div>
+`;

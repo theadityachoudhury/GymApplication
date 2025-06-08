@@ -1,0 +1,17 @@
+[
+	{
+		"about": "I am a professional coach with 10 years of experience in bodybuilding.",
+		"email": "test@example.com",
+		"fileUrls": [
+			"https://gym.s3.eu-central-1.amazonaws.com/files/certificate.pdf"
+		],
+		"firstName": "Jonson",
+		"id": "1",
+		"imageUrl": "https://gym.s3.eu-central-1.amazonaws.com/img/ff7863bf-63eb-4f2e-8041-75a81507acff.jpg",
+		"lastName": "Doe",
+		"preferableActivity": "YOGA",
+		"role": "CLIENT",
+		"specializations": ["YOGA", "PILATES", "CARDIO"],
+		"target": "IMPROVE_FLEXIBILITY"
+	}
+]

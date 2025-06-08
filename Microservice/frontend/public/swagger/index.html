@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="SwaggerUI" />
+  <title>EnergyX - SwaggerUI</title>
+  <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui.css" />
+</head>
+<style>
+  .opblock.opblock-options {
+    display: none;
+  }
+</style>
+
+<body>
+  <div id="swagger-ui"></div>
+  <script src="https://unpkg.com/swagger-ui-dist@5.11.0/swagger-ui-bundle.js" crossorigin></script>
+  <script id="data" type="application/json">
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "EnergyX API",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "https://gateway-microservice-run8-1-team2-gateway-service-dev.development.krci-dev.cloudmentor.academy/api",
+      "description": "production server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Authentication Endpoints"
+    },
+    {
+      "name": "Workouts",
+      "description": "Workout Endpoints"
+    },
+    {
+      "name": "Coaches",
+      "description": "Coach Endpoints"
+    },
+    {
+      "name": "Profile Update",
+      "description": "Profile Management Endpoints"
+    },
+    {
+      "name": "Health Check",
+      "description": "Health Check Endpoint"
+    }
+  ],
+  "paths": {
+    "/auth/sign-up": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Sign up a new user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignUpRequestBody"
+              },
+              "example": {
+                "email": "coach1@gmail.com",
+                "firstName": "Coach 1",
+                "lastName": "Singh",
+                "password": "Password123!",
+                "preferableActivity": "YOGA",
+                "target": "LOSE WEIGHT"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User signed up successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/sign-in": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Sign in a user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequestBody"
+              },
+              "example": {
+                "email": "coach1@gmail.com",
+                "password": "Password123!"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User signed in successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gym/workouts": {
+      "post": {
+        "tags": ["Workouts"],
+        "summary": "Create a new workout (Internal)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWorkoutRequestBody"
+              },
+              "example": {
+                "name": "Strength Training"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Workout created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Workouts"],
+        "summary": "Book Workout",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookWorkoutRequestBody"
+              },
+              "example": {
+                "workoutId": "680f8404d354271d86f383b3",
+                "coachId": "680f8002b32e6634bc94566d",
+                "timeSlotId": "680f861069ab12e9336380be",
+                "date": "2025-05-09"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Workout booked successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gym/workouts/map-workouts": {
+      "post": {
+        "tags": ["Workouts"],
+        "summary": "Map workouts to a coach (Internal)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MapWorkoutsRequestBody"
+              },
+              "example": {
+                "coachId": "6810e79e449afd73458ff841",
+                "workoutIds": ["6810e858449afd73458ff867"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Workouts mapped successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gym/workouts/available": {
+      "get": {
+        "tags": ["Workouts"],
+        "summary": "Get available workouts",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "timeSlotId",
+            "in": "query",
+            "description": "Time slot ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "coachId",
+            "in": "query",
+            "description": "Coach ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workoutId",
+            "in": "query",
+            "description": "Workout ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Date (format: YYYY-MM-DD)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of available workouts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Workout"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gym/workouts/bookings": {
+      "get": {
+        "tags": ["Workouts"],
+        "summary": "Get user's workout bookings",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "timeSlotId",
+            "in": "query",
+            "description": "Time slot ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "coachId",
+            "in": "query",
+            "description": "Coach ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workoutId",
+            "in": "query",
+            "description": "Workout ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Date (format: YYYY-MM-DD)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of user bookings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Booking"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gym/workouts/{id}": {
+      "delete": {
+        "tags": ["Workouts"],
+        "summary": "Cancel a workout booking",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Booking ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workout cancelled successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gym/coaches": {
+      "get": {
+        "tags": ["Coaches"],
+        "summary": "Get all coaches",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all coaches",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Coach"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gym/coaches/{id}": {
+      "get": {
+        "tags": ["Coaches"],
+        "summary": "Get coach details",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Coach ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Coach details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Coach"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gym/coaches/{id}/time-slots": {
+      "get": {
+        "tags": ["Coaches"],
+        "summary": "Get coach time slots",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Coach ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Date (format: YYYY-MM-DD)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Coach time slots",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TimeSlot"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gym/coaches/bookings/day": {
+      "get": {
+        "tags": ["Coaches"],
+        "summary": "Get user bookings for a specific day",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "required": true,
+            "description": "Date (format: YYYY-MM-DD)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User bookings for the day",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Booking"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gym/feedback": {
+      "post": {
+        "tags": ["Coaches"],
+        "summary": "Add feedback for a coach",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddFeedbackRequestBody"
+              },
+              "example": {
+                "bookingId": "680f89a43c77e763d7678a0b",
+                "message": "Very good coach, helped me a lot with my workout.",
+                "rating": 5
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Feedback added successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gym/feedback/coach/{id}": {
+      "get": {
+        "tags": ["Coaches"],
+        "summary": "Get feedback for a coach",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Coach ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Coach feedback",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Feedback"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/manage/profile": {
+      "put": {
+        "tags": ["Profile Update"],
+        "summary": "Update client profile",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProfileRequestBody"
+              },
+              "example": {
+                "firstName": "Aditya",
+                "lastName": "Choudhury"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Profile updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/manage/certificates/upload-urls": {
+      "post": {
+        "tags": ["Profile Update"],
+        "summary": "Get certificate upload URL",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetUploadUrlRequestBody"
+              },
+              "example": {
+                "fileNames": ["certificate.pdf"],
+                "fileTypes": ["application/pdf"],
+                "certificateType": "professional"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Upload URLs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "urls": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "tags": ["Health Check"],
+        "summary": "Check system health",
+        "responses": {
+          "200": {
+            "description": "System health status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "SignUpRequestBody": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "preferableActivity": {
+            "type": "string"
+          },
+          "target": {
+            "type": "string"
+          }
+        }
+      },
+      "LoginRequestBody": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "Token": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateWorkoutRequestBody": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "BookWorkoutRequestBody": {
+        "type": "object",
+        "properties": {
+          "workoutId": {
+            "type": "string"
+          },
+          "coachId": {
+            "type": "string"
+          },
+          "timeSlotId": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "MapWorkoutsRequestBody": {
+        "type": "object",
+        "properties": {
+          "coachId": {
+            "type": "string"
+          },
+          "workoutIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "AddFeedbackRequestBody": {
+        "type": "object",
+        "properties": {
+          "bookingId": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "rating": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          }
+        }
+      },
+      "UpdateProfileRequestBody": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          }
+        }
+      },
+      "GetUploadUrlRequestBody": {
+        "type": "object",
+        "properties": {
+          "fileNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "fileTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "certificateType": {
+            "type": "string"
+          }
+        }
+      },
+      "MessageResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "Workout": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "Coach": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "specialties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rating": {
+            "type": "number"
+          }
+        }
+      },
+      "TimeSlot": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "startTime": {
+            "type": "string"
+          },
+          "endTime": {
+            "type": "string"
+          },
+          "available": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Booking": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "workoutId": {
+            "type": "string"
+          },
+          "workoutName": {
+            "type": "string"
+          },
+          "coachId": {
+            "type": "string"
+          },
+          "coachName": {
+            "type": "string"
+          },
+          "timeSlotId": {
+            "type": "string"
+          },
+          "startTime": {
+            "type": "string"
+          },
+          "endTime": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "Feedback": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "bookingId": {
+            "type": "string"
+          },
+          "clientId": {
+            "type": "string"
+          },
+          "clientName": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "rating": {
+            "type": "integer"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}
+  </script>
+  <script>
+    window.onload = () => {
+      const dataElement = document.getElementById('data');
+      const spec = JSON.parse(dataElement.textContent);
+      window.ui = SwaggerUIBundle({
+        spec: spec,
+        dom_id: '#swagger-ui',
+      });
+    };
+  </script>
+</body>
+
+</html>

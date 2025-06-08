@@ -1,0 +1,1 @@
+1. Application energyx-frontend has been successfully deployed!!
