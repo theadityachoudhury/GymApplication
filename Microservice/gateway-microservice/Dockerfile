@@ -21,8 +21,13 @@ RUN npm ci --only=production && npm cache clean --force
 # Copy built assets from builder stage
 COPY --from=builder /app/dist ./dist
 
-# Create non-root user (security best practice)
+# Create non-root user and set proper ownership
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+# Create logs directory and set proper permissions
+RUN mkdir -p logs && chown -R appuser:appgroup /app
+
+# Switch to non-root user
 USER appuser
 
 # Set production environment
