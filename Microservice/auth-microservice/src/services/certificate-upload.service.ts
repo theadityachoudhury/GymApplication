@@ -33,7 +33,7 @@ export class CertificateUploadService {
     // Check for required environment variables
     if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY || !process.env.AWS_SESSION_TOKEN) {
       logger.error('Missing AWS credentials');
-      throw new Error('Missing AWS credentials');
+      // throw new Error('Missing AWS credentials');
     }
     if (!this.bucketName || !this.folderPath || !this.roleArn) {
       throw new Error('Missing required environment variables for S3 upload');
