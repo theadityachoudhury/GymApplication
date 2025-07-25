@@ -77,7 +77,12 @@ function CoachBooking() {
 			dispatch(
 				fetchCoachTimeSlots({
 					id: coachId!,
-					date: new Date(selectedDate).toLocaleDateString(),
+					// date: new Date(selectedDate).toLocaleDateString(),
+					date: new Date(selectedDate).toLocaleDateString('en-IN', {
+  						year: 'numeric',
+  						month: '2-digit',
+  						day: '2-digit'
+					}).split('/').reverse().join('-'),
 				})
 			).unwrap();
 		}
