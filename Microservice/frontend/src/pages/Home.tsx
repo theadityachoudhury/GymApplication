@@ -169,7 +169,11 @@ const Home = () => {
 		const apiWorkout = new ApiCoachesService();
 		const { data } = await apiWorkout.getCoachTimeSlots(
 			coachOptions[1].value,
-			new Date().toLocaleDateString(),
+			new Date().toLocaleDateString('en-IN', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit'
+}).split('/').reverse().join('-'),
 			true
 		);
 		setTimeSlots([...timeSlots, ...data]);
